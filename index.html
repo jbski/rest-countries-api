@@ -25,13 +25,19 @@
 <main class="main-container">    
     <section class="filters-container">
         <div class="country-filter">
-            <input type="search" name="country-search" id="country">
-            <select name="region-filter" id="region"></select>
+            <input placeholder="Search for a country..."  type="search" name="country-search" id="country">
+            <select name="region-filter" id="region">
+                <option value="filter-by-region">Filter by Region</option>
+            </select>
         </div>    
     </section>
     <section class="articles">
-        <div class="articles-container">
-            <h1>Country Flags go here</h1>
+        <div id='articles-container' class="articles-container">
+            <!-- <article class="country-card">Item1</article>
+            <article class="country-card">Item2</article>
+            <article class="country-card">Item3</article>
+            <article class="country-card">Item4</article>
+            <article class="country-card">Item5</article> -->
         </div>
     </section>
 </main>
