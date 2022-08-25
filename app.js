@@ -31,20 +31,57 @@ function getRegionData() {
         })
         .then(function(region_data){                
             region_data.forEach(function(data){
-                let country = `${data.name.common}`;
+                let country = `${data.name.official}`;
+                let population = data.population;
+                let region = data.region;
+                let capital = data.capital[0];
+                let flag_url = data.flags.png
+                // Create main article for country
                 const article = document.createElement('article');
                 article.className = 'country-card';
-                article.id = country;
-                // article.setAttribute('text', `${country}`);
-                article.appendChild(document.createTextNode(`${country}`));
+                // article.id = country;
+                // article.appendChild(document.createTextNode(`${country}`));
                 document.querySelector('div.articles-container').appendChild(article);
-                console.log(article);                          
-            })            
+
+                // Load flag image
+                const div_flag = document.createElement('div');
+                div_flag.className = 'card';        
+                article.appendChild(div_flag);
+                div_flag.style.backgroundImage="url(" + flag_url + ")";
+
+                // Load country name
+                const div_name = document.createElement('div');
+                div_name.className = 'country-name'; 
+                div_name.appendChild(document.createTextNode(`${country}`));       
+                article.appendChild(div_name);
+
+                // Load country population
+                const div_population = document.createElement('div');
+                div_population.className = 'country-population'; 
+                div_population.appendChild(document.createTextNode(`${population}`));       
+                article.appendChild(div_population);
+
+                // Load country region
+                const div_region = document.createElement('div');
+                div_region.className = 'country-region'; 
+                div_region.appendChild(document.createTextNode(`${region}`));       
+                article.appendChild(div_region);
+
+                // Load country capital
+                const div_capital = document.createElement('div');
+                div_capital.className = 'country-capital'; 
+                div_capital.appendChild(document.createTextNode(`${capital}`));       
+                article.appendChild(div_capital);    
+            }) 
         })        
         .catch(function(err){
             console.log(err);
         });
 }
+
+
+
+
 
 
 

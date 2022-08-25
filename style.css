@@ -98,7 +98,7 @@ body {
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 2rem;
     width: min(100% - 2rem, 1120px);
-    border: 1px solid #999;
+    /* border: 1px solid #999; */
 }
 
 .country-filter #country,
@@ -122,11 +122,66 @@ body {
 }
 
 .country-card {
-    border: 1px solid #888;
-    background-color: steelblue;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--color-white);
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
-    padding: 4rem;
-    text-align: center;
+    padding: 0;
+    text-align: left;
+    min-height: 425px;
+    width: min(100%, 400px);
+}
+
+.country-info {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: flex-start;
+    padding: 1rem 0 1rem 1rem;
+    /* min-height: 200px; */
+}
+
+.card {
+    background-image: url('./design/sample_flag.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 50%;
+    /* height: auto; */
+    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
+}
+
+.country-name {
+    font-size: var(--font-size-homepage);
+    padding: 0 1rem 0 1rem;
+    margin-top: 1rem;
+    font-weight: var(--font-weight-large);
+    min-height: 50px;
+    /* border: 1px silver solid; */
+}
+
+.country-population,
+.country-region,
+.country-capital {
+    font-size: var(--font-size-homepage);
+    font-weight: var(--font-weight-small);
+    padding: 0 1rem 0 1rem;
+}
+
+.country-population::before {
+    content: 'Population: ';
+    font-weight: var(--font-weight-medium);
+}
+
+.country-region::before {
+    content: 'Region: ';
+    font-weight: var(--font-weight-medium);
+}
+
+.country-capital::before {
+    content: 'Capital: ';
+    font-weight: var(--font-weight-medium);
 }
 
 .articles {
@@ -141,14 +196,24 @@ body {
 @media(min-width: 600px) {
 
     .articles-container {        
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        grid-gap: 3rem;        
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        grid-gap: 2.5rem;        
     }
 
+    .country-card {       
+        min-height: 275px;
+        width: min(100%, 300px);
+    }
+
+    .card {
+        width: 100%;
+        height: 50%;
+        background-size: cover;
+        
 }
 
 
 
-
+}
 
 
