@@ -25,7 +25,9 @@ regions.forEach(function(region){
 // Fetch API call to get region data
 document.getElementById('region').addEventListener('change', getRegionData);
 
-function getRegionData() {    
+function getRegionData() {   
+    // Check the mode (light mode / dark mode) 
+    curMode = document.querySelector('.mode-header-container h3').textContent;
     select = document.getElementById('region'); 
     //Get the value selected in the select box and assign it to region_value   
     region_value = select.options[select.selectedIndex].value;
@@ -82,7 +84,9 @@ function getRegionData() {
                 const div_capital = document.createElement('div');
                 div_capital.className = 'country-capital'; 
                 div_capital.appendChild(document.createTextNode(`${capital}`));       
-                article.appendChild(div_capital);    
+                article.appendChild(div_capital);  
+                
+                changeModeStyling(curMode)
             }) 
         })        
         .catch(function(err){
@@ -96,6 +100,8 @@ function getRegionData() {
 document.getElementById('country').addEventListener('input', getCountry);
 
 function getCountry(e) {    
+    // Check the mode (light mode / dark mode) 
+    curMode = document.querySelector('.mode-header-container h3').textContent;
     select = document.getElementById('country'); 
     //Get the value selected in the select box and assign it to region_value   
     country_value = e.target.value;
@@ -154,6 +160,8 @@ function getCountry(e) {
                 div_capital.className = 'country-capital'; 
                 div_capital.appendChild(document.createTextNode(`${capital}`));       
                 article.appendChild(div_capital);    
+
+                changeModeStyling(curMode)
             }) 
         })        
         .catch(function(err){
@@ -162,8 +170,6 @@ function getCountry(e) {
 }
 
 
-
-https://restcountries.com/v2/all
 
 // Fetch API call all countryies
 function getCountries() {    
@@ -228,6 +234,84 @@ function getCountries() {
         .catch(function(err){
             console.log(err);
         });
+}
+
+
+// Change mode
+document.querySelector('.mode-header-container').addEventListener('click', changeMode);
+
+function changeMode(e){
+    curMode = document.querySelector('.mode-header-container h3').textContent;
+    let newMode = '';
+    if (curMode == 'Light Mode') {
+        newMode = 'Dark Mode';       
+    } else {
+        newMode = 'Light Mode';      
+    } 
+    const newLightMode = document.createElement('h3');
+    newLightMode.className = 'mode';
+    newLightMode.appendChild(document.createTextNode(newMode));
+
+    const oldLightMode = document.querySelector('.mode');
+
+    const updateMode = document.querySelector('.mode-header-container')
+    updateMode.replaceChild(newLightMode, oldLightMode);
+    curMode = document.querySelector('.mode-header-container h3').textContent;  
+
+    changeModeStyling(newMode);
+}
+
+
+
+function changeModeStyling(mode){
+    // console.log(`STYLE: ${mode}`);
+    const dark_header = 'hsl(209, 23%, 22%)';
+    const dark_body = 'hsl(207, 26%, 17%)';
+    const dark_text = 'hsl(0, 0%, 100%)'
+
+    const light_header = 'hsl(0, 0%, 100%)';
+    const light_body = 'hsl(0, 0%, 98%)';
+    const light_text = 'hsl(200, 15%, 8%)';
+    
+
+    header_main = document.querySelector('.main-header-container');
+    header_sub = document.querySelector('.header-container');
+    body = document.body;
+    articles = document.querySelectorAll('.country-card');
+    country_filter = document.getElementById('country');
+    region_filter = document.getElementById('region');
+
+    if (mode === 'Dark Mode') {
+        body.style.backgroundColor=dark_body;        
+        header_main.style.backgroundColor=dark_header;
+        header_sub.style.backgroundColor=dark_header;
+        header_sub.style.color=dark_text;
+
+        articles.forEach(function(article){
+            article.style.backgroundColor=dark_header;
+            article.style.color=dark_text;
+        })
+
+        country_filter.style.backgroundColor=dark_header;
+        country_filter.style.color=dark_text;
+        region_filter.style.backgroundColor=dark_header;      
+           
+
+    } else {
+        body.style.backgroundColor=light_body;
+        header_main.style.backgroundColor=light_header;
+        header_sub.style.backgroundColor=light_header;
+        header_sub.style.color=light_text;
+
+        articles.forEach(function(article){
+            article.style.backgroundColor=light_header;
+            article.style.color=light_text;
+        })
+
+        country_filter.style.backgroundColor=light_header;
+        country_filter.style.color=light_text;
+        region_filter.style.backgroundColor=light_header;
+    }
 }
 
 

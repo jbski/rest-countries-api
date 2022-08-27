@@ -55,6 +55,7 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
 }
 
 .main-header-container h1 {
@@ -117,6 +118,7 @@ body {
     width: min(100%, 400px);
     margin-right: 1rem;
 }
+
 
 #region {
     color: var(--color-dark-gray-light-mode-input);
