@@ -61,6 +61,7 @@ body {
 .main-header-container h1 {
     font-size: var(--font-size-homepage);
     font-weight: var(--font-weight-large);
+    cursor: pointer;
 }
 
 .main-header-container h3 {
@@ -162,6 +163,7 @@ body {
     font-weight: var(--font-weight-large);
     min-height: 50px;
     text-align:left;
+    cursor: pointer;
 }
 
 .country-population,

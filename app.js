@@ -9,8 +9,6 @@ if (window.addEventListener) {
  }
 
 
-
-
 // Populate the regions select box
 regions = ['Africa', 'Americas', 'Asia', 'Europe', 'Oceania'];
 regions.forEach(function(region){
@@ -201,16 +199,22 @@ function getCountries() {
 
                 // Load flag image
                 const div_flag = document.createElement('div');
-                div_flag.className = 'card';        
+                div_flag.className = 'card';       
                 article.appendChild(div_flag);
                 div_flag.style.backgroundImage="url(" + flag_url + ")";
 
                 // Load country name
                 const div_name = document.createElement('div');
+                // const a = document.createElement('a');
+                // a.className = 'country-name';
+                // a.id = country;
+                // a.href = 'detail.html';
                 div_name.className = 'country-name'; 
-                div_name.appendChild(document.createTextNode(`${country}`));       
-                article.appendChild(div_name);
-
+                div_name.appendChild(document.createTextNode(`${country}`)); 
+                // a.appendChild(document.createTextNode(`${country}`)); 
+                article.appendChild(div_name); 
+                // article.appendChild(a); 
+             
                 // Load country population
                 const div_population = document.createElement('div');
                 div_population.className = 'country-population'; 
@@ -229,7 +233,7 @@ function getCountries() {
                 div_capital.className = 'country-capital'; 
                 div_capital.appendChild(document.createTextNode(`${capital}`));       
                 article.appendChild(div_capital);    
-            }) 
+            })         
         })        
         .catch(function(err){
             console.log(err);
@@ -271,8 +275,8 @@ function changeModeStyling(mode){
 
     const light_header = 'hsl(0, 0%, 100%)';
     const light_body = 'hsl(0, 0%, 98%)';
-    const light_text = 'hsl(200, 15%, 8%)';
-    
+    const light_text = 'hsl(200, 15%, 8%)'; 
+    const light_input = 'hsl(0, 0%, 52%)';
 
     header_main = document.querySelector('.main-header-container');
     header_sub = document.querySelector('.header-container');
@@ -280,38 +284,82 @@ function changeModeStyling(mode){
     articles = document.querySelectorAll('.country-card');
     country_filter = document.getElementById('country');
     region_filter = document.getElementById('region');
+    country_names = document.querySelectorAll('.country-name');
 
     if (mode === 'Dark Mode') {
         body.style.backgroundColor=dark_body;        
         header_main.style.backgroundColor=dark_header;
         header_sub.style.backgroundColor=dark_header;
         header_sub.style.color=dark_text;
-
         articles.forEach(function(article){
             article.style.backgroundColor=dark_header;
             article.style.color=dark_text;
-        })
+        });
+
+        country_names.forEach(function(country_name){
+            country_name.style.color=dark_text;
+        });
 
         country_filter.style.backgroundColor=dark_header;
         country_filter.style.color=dark_text;
-        region_filter.style.backgroundColor=dark_header;      
-           
-
+        region_filter.style.backgroundColor=dark_header;
+        region_filter.style.color=dark_text;
     } else {
         body.style.backgroundColor=light_body;
         header_main.style.backgroundColor=light_header;
         header_sub.style.backgroundColor=light_header;
         header_sub.style.color=light_text;
-
         articles.forEach(function(article){
             article.style.backgroundColor=light_header;
             article.style.color=light_text;
-        })
+        });
+
+        country_names.forEach(function(country_name){
+            country_name.style.color=light_text;
+        });
 
         country_filter.style.backgroundColor=light_header;
         country_filter.style.color=light_text;
         region_filter.style.backgroundColor=light_header;
+        region_filter.style.color=light_input;
     }
+}
+
+
+//Refresh page
+
+document.querySelector('h1').addEventListener('click', refreshPage);
+
+function refreshPage(){
+    curMode = document.querySelector('.mode').textContent;
+    // console.log(`curMode: ${curMode}`);
+    let localMode;
+    localStorage.setItem('curmode', curMode);
+    // console.log(`Local Mode: ${localMode}`);
+
+    
+    localMode = localStorage.curmode;
+    // console.log(`GetLocalMode: ${localMode}`);
+    document.location.reload();      
+};
+
+
+document.addEventListener('click', getData);
+
+function getData(e){
+    let countries = document.querySelectorAll('.country-name');
+    countries.forEach(function(country){ 
+        let target_country = e.target.textContent;  
+        if (country.textContent === target_country){
+            // Add country to session storage
+            sessionStorage.setItem('country_name', target_country);
+            // Open new tab with country
+            window.location.href = 'detail.html';
+
+
+            document.createElement('h2');
+        }            
+    })
 }
 
 
@@ -322,10 +370,22 @@ function changeModeStyling(mode){
 
 
 
-    
-    
-    
-    
 
-   
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
