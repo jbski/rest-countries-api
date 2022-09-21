@@ -169,7 +169,7 @@ function getCountry(e) {
 
 
 
-// Fetch API call all countryies
+// Fetch API call all countries
 function getCountries() {    
     select = document.getElementById('country'); 
     //Get the value selected in the select box and assign it to region_value
@@ -205,15 +205,9 @@ function getCountries() {
 
                 // Load country name
                 const div_name = document.createElement('div');
-                // const a = document.createElement('a');
-                // a.className = 'country-name';
-                // a.id = country;
-                // a.href = 'detail.html';
                 div_name.className = 'country-name'; 
                 div_name.appendChild(document.createTextNode(`${country}`)); 
-                // a.appendChild(document.createTextNode(`${country}`)); 
                 article.appendChild(div_name); 
-                // article.appendChild(a); 
              
                 // Load country population
                 const div_population = document.createElement('div');
